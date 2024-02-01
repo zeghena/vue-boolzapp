@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: brown;
+}
+
+.de-bug {
+  border: 2px solid rgb(22, 22, 22);
+}
+
+.wrapper-esterno {
+  width: 80%;
+  height: 90vh;
+  margin: 20px auto;
+  padding: 20px;
+  overflow: hidden;
+}
+.colonna {
+  float: left;
+  box-sizing: border-box;
+}
+
+.colonna-40 {
+  float: left;
+}
+
+.colonna-40 {
+  width: 40%;
+  /* border: 1px solid #000; */
+  padding: 10px;
+}
+
+.colonna-60 {
+  width: 60%;
+  padding: 10px;
+}
+
+.card {
+  width: 95%;
+  height: 100px;
+}
+
+.rubrica {
+  width: 95%;
+  height: 100%;
+}
