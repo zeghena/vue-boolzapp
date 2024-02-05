@@ -49,8 +49,8 @@ body {
 }
 
 .main-chat {
-  height: 200px;
   flex-grow: 1;
+  background-image: search;
 }
 
 .rubrica {
@@ -70,6 +70,7 @@ body {
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
+  cursor: pointer;
 }
 
 .barra-scrittura {
@@ -102,4 +103,33 @@ body {
 }
 .text {
   font-size: 18px;
+  line-height: 0.6;
+  font-size: small;
+}
+
+.font {
+  font-size: xx-large;
+}
+.dati-utente {
+  line-height: 0.4;
+  margin-left: 0;
+  flex-grow: 1;
+}
+.icon {
+  height: 100%;
+  width: 100px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: large;
+}
+.icon2 {
+  height: 100%;
+}
+.wrapper-contact-list {
+  overflow: auto;
+}
+
+.right {
+  text-align: right;
 }

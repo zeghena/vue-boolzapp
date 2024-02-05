@@ -40,7 +40,7 @@
         <!-- ## colonna 40 -->
         <div class="colonna colonna-40 debug contenitore">
 
-
+            <!-- ## card intestazione -->
             <div class="card debug utente">
                 <div class="icona">
                     <img class="img" src="./img/avatar_io.jpg" alt="">
@@ -54,6 +54,8 @@
                 </div>
 
             </div>
+
+            <!-- ## card notifiche "statica" -->
             <div class="card notifiche debug">
                 <div class="icona2">
                     <i class="fa-solid fa-bell-slash"></i>
@@ -66,6 +68,8 @@
                 </div>
 
             </div>
+
+            <!-- ## Barra di Ricerca -->
             <div class="card debug">
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping">
@@ -81,16 +85,17 @@
             <!-- #### utenti###  -->
 
             <div class="wrapper-contact-list">
-                <div v-for="(contact, k) in contacts" class="card debug utente">
+                <div v-for="(contact, k) in contacts" @click="selectContact(k)" class="card debug utente">
                     <div class="icona">
                         <img class="img" :src="contact.avatar" alt="">
-                        <p>{{contact.name}}</p>
                     </div>
-                    <div class="icon">
-                        <i class="fa-solid fa-power-off"></i>
-                        <i class="fa-solid fa-message"></i>
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    <div class="dati-utente">
+                        <p class="font">{{contact.name}}</p>
+                        <p>ultimo messaggio inviato</p>
 
+                    </div>
+                    <div class="icon2">
+                        <p>Orario</p>
                     </div>
                 </div>
             </div>
@@ -105,18 +110,29 @@
         <!-- ## colonna 60 -->
 
         <div class="colonna colonna-60 debug contenitore">
-            <div class="card debug">
-                <p>intestazione</p>
+
+            <div class="card debug utente">
+                <div class="icona" v-if="selected">
+                    <img class="img" :src="selected.avatar" alt="">
+                    <p>{{selected.name}}</p>
+                </div>
+                <div class="icon" v-if="selected">
+                    <i class="fa-solid fa-power-off"></i>
+                    <i class="fa-solid fa-message"></i>
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                </div>
             </div>
             <div class="card debug main-chat">
-                <p>main chat</p>
+                <div v-if="selected" v-for="mess in selected.messages"
+                    :class="{ right:mess.status==='sent',left:mess.status==='received'}">
+                    {{mess.message}}
+                </div>
             </div>
             <div class="card debug barra-scrittura">
-                <p>barra di scrittura
+                <input @keyup="saveMessage($event)" v-model="message" class="form-control"
+                    placeholder="Scrivi per chattare" v-if="selected" type="text">
             </div>
         </div>
-
-
     </div>
 
 </body>

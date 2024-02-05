@@ -1,15 +1,15 @@
-const { createApp } = Vue;
+const { createApp, defineModel } = Vue;
 
 createApp({
   data() {
     return {
       // ####  array contatti
-
+      message: "",
       contacts: [
         {
           name: "Michele",
           avatar: "./img/avatar_1.jpg",
-          visible: true,
+          visible: false,
           messages: [
             {
               date: "10/01/2020 15:30:55",
@@ -31,7 +31,7 @@ createApp({
         {
           name: "Fabio",
           avatar: "./img/avatar_2.jpg",
-          visible: true,
+          visible: false,
           messages: [
             {
               date: "20/03/2020 16:30:00",
@@ -53,7 +53,7 @@ createApp({
         {
           name: "Samuele",
           avatar: "./img/avatar_3.jpg",
-          visible: true,
+          visible: false,
           messages: [
             {
               date: "28/03/2020 10:10:40",
@@ -75,7 +75,7 @@ createApp({
         {
           name: "Alessandro B.",
           avatar: "./img/avatar_4.jpg",
-          visible: true,
+          visible: false,
           messages: [
             {
               date: "10/01/2020 15:30:55",
@@ -92,7 +92,7 @@ createApp({
         {
           name: "Alessandro L.",
           avatar: "./img/avatar_5.jpg",
-          visible: true,
+          visible: false,
           messages: [
             {
               date: "10/01/2020 15:30:55",
@@ -109,7 +109,7 @@ createApp({
         {
           name: "Claudia",
           avatar: "./img/avatar_6.jpg",
-          visible: true,
+          visible: false,
           messages: [
             {
               date: "10/01/2020 15:30:55",
@@ -131,7 +131,7 @@ createApp({
         {
           name: "Federico",
           avatar: "./img/avatar_7.jpg",
-          visible: true,
+          visible: false,
           messages: [
             {
               date: "10/01/2020 15:30:55",
@@ -148,7 +148,7 @@ createApp({
         {
           name: "Davide",
           avatar: "./img/avatar_8.jpg",
-          visible: true,
+          visible: false,
           messages: [
             {
               date: "10/01/2020 15:30:55",
@@ -169,5 +169,53 @@ createApp({
         },
       ],
     };
+  },
+
+  methods: {
+    selectContact(contact) {
+      this.selected = contact;
+    },
+    saveMessage(key) {
+      if (key.code === "Enter") {
+        const i = this.contacts.findIndex((contact) => {
+          return contact.avatar === this.selected.avatar;
+        });
+        this.contacts[i].messages.push({
+          date: "10/01/2020 15:51:00",
+          message: this.message,
+          status: "sent",
+        });
+        this.message = "";
+      }
+    },
+  },
+  computed: {
+    // message: {
+    //   get() {
+    //     return this.message;
+    //   },
+    //   set(letter) {
+    //     // this.message += letter;
+    //     console.log(this.message);
+    //   },
+    // },
+    selected: {
+      // getter
+      get() {
+        const res = this.contacts.find((contact) => {
+          return contact.visible === true;
+        });
+        return res;
+      },
+      // setter
+      set(k) {
+        this.contacts = this.contacts.map((contact) => {
+          const res = contact;
+          res.visible = false;
+          return res;
+        });
+        this.contacts[k].visible = true;
+      },
+    },
   },
 }).mount("#app");
